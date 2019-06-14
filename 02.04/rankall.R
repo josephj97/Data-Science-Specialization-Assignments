@@ -1,24 +1,32 @@
 rankall <- function(outcome, rank = "best"){
     careMeasures <- read.csv("E:/Courses/Data Science/Assignments/02.04/outcome-of-care-measures.csv", colClasses = "character")
-    dataFrame<-as.data.frame(cbind(careMeasures[,2],  ## hospital names
-                                   careMeasures[,7],    ## states
-                                   careMeasures[,11],   ## heart attack rates
-                                   careMeasures[,17],   ## heart failure rates
-                                   careMeasures[,23]),  ## Pneumonia rates
-                             stringsAsFactors = FALSE)
-    colnames(dataFrame)<-c("hospital names", "states", "heart attack", "heart failure", "pneumonia")
-    dataFrame<-subset(careMeasures,careMeasures[,outcome]!="Not Available")
-    if(!outcome %in% c("heart attack", "heart failure", "pneumonia")){
+    
+    if(!outcome %in% c("heart attack", "heart failure", "pneumonia"))
         stop("invalid outcome")
+    
+    if(outcome == "heart attack")
+        colNum <- 11
+    else if(outcome == "heart failure")
+        colNum <- 17
+    else if(outcome == "pneumonia")
+        colNum <- 23
+    
+    dataFrame <- data.frame()
+    for(i in sort(unique(careMeasures[,7]))){
+        oneStateRank <- careMeasures[(careMeasures[,7] == i),]
+        oneStateRank[,colNum]<-as.numeric(oneStateRank[,colNum])
+        oneStateRank <- oneStateRank[!is.na(oneStateRank[,colNum]),]
+        oneStateRank <- oneStateRank[order(oneStateRank[, colNum], oneStateRank[, 2]), ]
+        if(rank=="best")
+            targetRow <- 1
+        else if(rank=="worst")
+            targetRow <- nrow(oneStateRank)
+        else
+            targetRow <- rank
+        targetHospital <- oneStateRank[targetRow,2]
+        dataFrame <- rbind(dataFrame,data.frame("hospital" = targetHospital, "state" = i), stringsAsFactors = FALSE)
     }
-    if(rank == "best"){
-        rank = 1
-    }
-    else if(rank == "worst"){
-        rank <- length(dataFrame[,outcome])
-    }
-    sortedDF <- sort(as.numeric(dataFrame[,outcome]))
-    stateDF <- subset(dataFrame,as.numeric(dataFrame[,outcome])==sortedDF)
+    return(dataFrame)
 }
 
 head(rankall("heart attack", 20), 10)
