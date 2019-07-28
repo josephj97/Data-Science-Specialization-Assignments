@@ -1,10 +1,10 @@
 #Question 1
 fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
-destFile <- "E:/Courses/Data Science/Assignments/03.03/getdata%2Fdata%2Fss06hid.csv"
+destFile <- "E:/Courses/Data Science/Assignments/03.03/ss06hid.csv"
 if(!file.exists(destFile)){
     download.file(fileURL,destfile = destFile, method = 'curl')
 }
-data <- read.csv("E:/Courses/Data Science/Assignments/03.03/getdata%2Fdata%2Fss06hid.csv")
+data <- read.csv(destFile)
 #data
 agricultureLogical <- data$ACR == 3 & data$AGS == 6
 head(which(agricultureLogical))
@@ -14,11 +14,11 @@ head(which(agricultureLogical))
 #Question 2
 library(jpeg)
 fileURL2 <- "https://d396qusza40orc.cloudfront.net/getdata%2Fjeff.jpg"
-destFile2 <- "E:/Courses/Data Science/Assignments/03.03/getdata%2Fjeff.jpg"
+destFile2 <- "E:/Courses/Data Science/Assignments/03.03/jeff.jpg"
 if(!file.exists(destFile2)){
     download.file(fileURL2,destFile2, mode = 'wb')
 }
-picture <- readJPEG("E:/Courses/Data Science/Assignments/03.03/getdata%2Fjeff.jpg", native = TRUE)
+picture <- readJPEG(destFile2, native = TRUE)
 quantile(picture,probs = c(0.3,0.8))
 
 #--------------------------------------------------------------------------------------------------
