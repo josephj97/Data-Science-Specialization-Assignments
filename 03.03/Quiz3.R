@@ -29,7 +29,7 @@ fileURL3a <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
 destFile3a <- "E:/Courses/Data Science/Assignments/03.03/GDP.csv"
 fileURL3b <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
 destFile3b <- "E:/Courses/Data Science/Assignments/03.03/EDSTATS.csv"
-if(!file.exists(destFile3)){
+if(!file.exists(destFile3a)){
     download.file(fileURL3a,destFile3a, method = 'curl')
 }
 gdp <- fread(destFile3a, skip=5, nrows = 190, select = c(1, 2, 4, 5)
