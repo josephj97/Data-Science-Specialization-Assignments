@@ -1,6 +1,6 @@
 #Question 1
 fileURL1 <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
-destFile1 <- "E:/Courses/Data Science/Assignments/03.04/ss06hid.csv"
+destFile1 <- "E:/Courses/Data Science/Assignments/03.04/Quiz/ss06hid.csv"
 if(!file.exists(destFile1)){
     download.file(fileURL1,destfile = destFile1, method = "curl")
 }
@@ -13,7 +13,7 @@ nameSplit[123]
 #Question 2
 library(data.table)
 fileURL2 <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
-destFile2 <- "E:/Courses/Data Science/Assignments/03.03/GDP.csv"
+destFile2 <- "E:/Courses/Data Science/Assignments/03.04/Quiz/GDP.csv"
 if(!file.exists(destFile2)){
     download.file(fileURL2,destFile2, method = 'curl')
 }
@@ -31,7 +31,7 @@ gdp[, mean(as.integer(gsub(pattern = ',', replacement = '', x = Total)))]
 #Question 4
 library(data.table)
 fileURL3a <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
-destFile3a <- "E:/Courses/Data Science/Assignments/03.03/GDP.csv"
+destFile3a <- "E:/Courses/Data Science/Assignments/03.04/Quiz/GDP.csv"
 fileURL3b <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
 destFile3b <- "E:/Courses/Data Science/Assignments/03.03/EDSTATS.csv"
 if(!file.exists(destFile3a)){
